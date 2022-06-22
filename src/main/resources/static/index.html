@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>PRIMEIRO SISTEMA</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+ <link rel="stylesheet" type="text/css"	href="webjars/bootstrap/4.5.2/css/bootstrap.min.css" />
+ <link rel="stylesheet" type="text/css"	href="webjars/EasyAutocomplete/1.3.3/dist/easy-autocomplete.themes.css" />
+</head>
+<body>
+ <div class="container">
+  <script type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="webjars/EasyAutocomplete/1.3.3/dist/jquery.easy-autocomplete.js"></script>  
+  <script type="text/javascript">
+	$(document).ready(function () {
+
+		var options = {
+			url: function (filtro) {
+				return '/api/find/';
+			},
+			getValue: function (element) {
+				return "["+element.nome+"] <i>"+ element.categoria +" </i> - "+element.valor+" - "+element.descricao;
+			},
+			ajaxSettings: {
+				dataType: 'json',
+				method: 'GET',
+				data: {					
+				}
+			},
+			preparePostData: function (data) {
+				data.filtro = $('#search').val();
+				return data;
+			},
+			theme: "square",
+			list: {
+				maxNumberOfElements: 15
+			},
+			requestDelay: 400
+		};
+		
+		$('#search').easyAutocomplete(options);
+	});
+</script>
+<div class="jumbotron">
+  <h1 align="center">
+   <img alt="Spring" class="block" id="springlogo" src="spring-logo.svg" width="300">
+   <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html" target="_BLANK">Spring Boot Properties</a>
+  </h1>
+  <form>
+	Buscar tecnologia:
+   <input type="text" id="search" autofocus="autofocus"  class="form-control" />
+  </form>
+  	Clique no link "Spring Boot Properties" para acessar a documentação completa de propriedades do Spring Boot.
+</div>
+</div>
+</body>
+</html>
